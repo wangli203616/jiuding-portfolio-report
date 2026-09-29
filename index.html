@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>九鼎投资系 被投企业全清单 · 金字塔九层分层与优先级排序</title>
+<style>
+:root{--paper:#f6f4ef;--card:#fff;--ink:#1d2733;--ink2:#45535f;--ink3:#85919b;
+--navy:#122b44;--navy2:#1b3f63;--teal:#0d5c57;--teal-soft:#e4efec;
+--gold:#a88532;--gold-soft:#f5ecd7;--line:#e5e0d6;--danger:#9d3a32;--danger-soft:#f8e8e5;
+--warn:#866013;--warn-soft:#faf1da;--ok:#2e6b45;--ok-soft:#e7f1ea}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:14px}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","HarmonyOS Sans SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;background:var(--paper);color:var(--ink);line-height:1.78;font-size:15.5px;padding:12px 12px 96px}
+.page{max-width:920px;margin:0 auto}
+.cover{background:linear-gradient(145deg,#0d2338,#17415f 60%,#1c5672);border-radius:20px;color:#f0f4f8;padding:32px 22px 24px;margin-bottom:18px;position:relative;overflow:hidden}
+.cover::after{content:"";position:absolute;right:-80px;top:-80px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.05)}
+.cover .k{display:inline-block;font-size:11.5px;letter-spacing:.14em;background:rgba(255,255,255,.13);padding:4px 12px;border-radius:999px;color:#d8e5ef;margin-bottom:14px}
+.cover h1{font-size:clamp(21px,5vw,31px);line-height:1.4;margin-bottom:10px;color:#fff}
+.cover .sub{font-size:13.5px;color:#bcd0df;line-height:1.7}
+.toc{background:linear-gradient(180deg,#ffffff,#fbfaf6);border:1px solid var(--line);border-radius:16px;padding:16px 14px;margin-bottom:16px;box-shadow:0 3px 14px -12px rgba(16,42,58,.5)}
+.toc h2{font-size:14.5px;color:var(--ink2);margin-bottom:6px}
+.toc .toc-hint{font-size:11.5px;color:var(--ink3);line-height:1.55;margin-bottom:12px}
+.toc .toc-hint b{color:var(--teal)}
+.toc-grid{display:grid;grid-template-columns:1fr;gap:7px}
+@media(min-width:680px){.toc-grid{grid-template-columns:1fr 1fr}}
+.toc-item{display:flex;flex-direction:column}
+.toc a.toc-l2{position:relative;display:block;font-size:13.5px;font-weight:600;color:var(--navy);text-decoration:none;padding:11px 30px 11px 13px;border:1px solid #e2e8ee;border-radius:11px;background:#fff;line-height:1.45;transition:background .16s,border-color .16s,transform .12s,box-shadow .16s}
+.toc .chips{display:flex;flex-wrap:wrap;gap:5px;padding:0 2px 2px 4px;margin:5px 0 0}
+.toc .chips a{display:inline-block;font-size:11.5px;font-weight:600;color:var(--teal);text-decoration:none;padding:2px 7px;border-radius:7px;background:var(--teal-soft);border:1px solid #cfe2dd;line-height:1.5;transition:background .15s}
+.toc .chips a:hover,.toc .chips a:active{background:#bfe0d8}
+.toc a::before{content:"";position:absolute;left:0;top:9px;bottom:9px;width:3px;border-radius:0 3px 3px 0;background:var(--teal);opacity:0;transition:opacity .16s}
+.toc a::after{content:"›";position:absolute;right:11px;top:50%;transform:translateY(-50%);font-size:18px;font-weight:700;color:var(--teal);opacity:.5;line-height:1}
+.toc a:hover{background:var(--teal-soft);border-color:#bcd8d3;box-shadow:0 4px 12px -10px rgba(13,92,87,.65)}
+.toc a:hover::before,.toc a:hover::after{opacity:1}
+.toc a:active{transform:scale(.985);background:#d7e8e3}
+a.xref{color:var(--teal);font-weight:600;text-decoration:none;border-bottom:1px dashed rgba(13,92,87,.55);background:rgba(13,92,87,.06);padding:0 3px;border-radius:4px;white-space:nowrap;cursor:pointer}
+a.xref:hover{background:var(--teal-soft);border-bottom-style:solid}
+a.xref:active{background:#cfe6e0}
+.anchor{display:block;height:0;overflow:hidden}
+section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 16px;margin-bottom:16px}
+@media(min-width:720px){section{padding:28px 30px}}
+h1,h2,h3,h4,h5{color:var(--navy);line-height:1.45}
+h2{font-size:clamp(17px,3.6vw,21px);margin:6px 0 14px;display:flex;align-items:center;gap:9px}
+h2 .no{flex:none;display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 6px;border-radius:9px;background:var(--navy);color:#fff;font-size:13px}
+h3{font-size:16px;color:var(--navy2);margin:22px 0 10px}
+h3::before{content:"▍";color:var(--gold)}
+h2.sec.sub{display:block;font-size:15px;font-weight:600;color:var(--navy2);margin:0 0 14px;padding-bottom:10px;border-bottom:1px dashed var(--line)}
+h4{font-size:14.5px;margin:14px 0 6px}
+p{margin:0 0 11px}
+ul,ol{margin:0 0 12px;padding-left:22px}
+li{margin:5px 0}
+strong,b{color:var(--navy)}
+blockquote{border-left:4px solid var(--gold);background:var(--gold-soft);border-radius:10px;padding:12px 15px;margin:12px 0;font-size:13.5px;color:#5b4a1d}
+blockquote p{margin:2px 0}
+hr{border:none;border-top:1px dashed var(--line);margin:22px 0}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;margin:12px 0 16px}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:12.8px;background:#fff}
+th{background:#edf1f5;color:var(--navy);text-align:left;padding:8px 9px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:7px 9px;border-bottom:1px solid #f0ece4;vertical-align:top}
+table td:first-child,table th:first-child{white-space:nowrap}
+table td:nth-child(2),table th:nth-child(2){white-space:nowrap}
+tr:last-child td{border-bottom:none}
+pre.code{background:#0f2233;color:#dfe9f2;border-radius:12px;padding:13px 14px;margin:12px 0 16px;overflow-x:auto;-webkit-overflow-scrolling:touch;font-size:12.2px;line-height:1.85}
+pre.code code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Courier New",monospace;white-space:pre;color:inherit;background:none}
+.tw-hint{font-size:11.5px;color:var(--ink3);margin:-8px 0 12px;padding-left:2px}
+tr:nth-child(even) td{background:#fbfaf7}
+.tag{display:inline-block;font-size:11px;padding:1px 8px;border-radius:999px;margin:0 2px;white-space:nowrap}
+.tag.fact{background:var(--ok-soft);color:var(--ok)}
+.tag.media{background:var(--warn-soft);color:var(--warn)}
+.tag.quote{background:#e7eefb;color:#2c5282}
+.tag.pending{background:#f1e7f5;color:#6b3f7d}
+.tag.calc{background:#f6efdc;color:#7a5a12}
+.tag.guess{background:#efe8f7;color:#5b3f7d}
+.callout{background:var(--teal-soft);border-left:4px solid var(--teal);border-radius:12px;padding:13px 15px;margin:13px 0}
+.foot{text-align:center;color:var(--ink3);font-size:11.5px;margin-top:18px;border-top:1px solid var(--line);padding-top:14px;line-height:1.8}
+.btn-top{position:fixed;right:14px;bottom:16px;width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;border:none;font-size:19px;box-shadow:0 6px 18px rgba(16,42,58,.28);z-index:60;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s}
+.btn-top.show{opacity:1;pointer-events:auto}
+@media print{.cover,.toc,.btn-top{display:none}body{background:#fff;padding:0}section{border:none}}
+.navwrap{position:sticky;top:0;z-index:70;background:rgba(246,244,239,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);padding:9px 0 10px;margin-bottom:8px;border-bottom:1px solid rgba(229,224,214,.9)}
+.navwrap .navlabel{display:block;font-size:11px;letter-spacing:.08em;color:#85919b;margin:0 0 6px 3px;font-weight:700}
+.navwrap .navlabel b{color:#0d5c57}
+.tabs{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;background:#102a43;border-radius:14px;padding:7px;margin-bottom:4px;scrollbar-width:none;box-shadow:0 6px 18px -12px rgba(16,42,58,.8)}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{flex:none;font-size:13px;color:#cfe0ee;text-decoration:none;padding:9px 14px;border-radius:10px;white-space:nowrap;line-height:1.35;border:1px solid transparent;transition:background .15s}
+.tabs a:not(.active)::after{content:" ›";opacity:.55}
+.tabs a.active{background:#e8c98b;color:#3d2e0a;font-weight:700;box-shadow:0 2px 8px -2px rgba(0,0,0,.35)}
+.tabs a:hover{background:rgba(255,255,255,.14)}
+.tabs a.active:hover{background:#e8c98b}
+</style>
+</head>
+<body>
+
+<div class="page">
+<header class="cover">
+  <span class="k">股权投资研究 · 九鼎系老股专题</span>
+  <h1>九鼎投资系 被投企业全清单 · 金字塔九层分层与优先级排序</h1>
+  <div class="sub">官网 115 家已上市/挂牌案例 + 5 家未上市在投 + 3 个关键主体 ｜ 金字塔九层分层与优先级排序 ｜ 核查日期 2026-09-29 ｜ 全量资质标签 + 交易所行情逐条核验</div>
+</header>
+<nav class="toc"><h2>📑 目录 · 点一下直接跳过去</h2><div class="toc-hint">章节卡片可直接点击；卡片下方的小号数字是 <b>子节</b> 入口，点它直达；正文里 <b>§</b> 开头的编号同样可以点。</div><div class="toc-grid"><div class="toc-item"><a class="toc-l2" href="#s1">0. 一页结论</a></div><div class="toc-item"><a class="toc-l2" href="#s2">1. 九鼎系当前状态（一手事实，决定议价与风险）</a></div><div class="toc-item"><a class="toc-l2" href="#s3">2. 金字塔九层：认定口径与本次实测到的坑</a></div><div class="toc-item"><a class="toc-l2" href="#s4">3. 全量清单（按金字塔层级排序）</a><div class="chips"><a href="#sec-3-1" title="3.1 官网披露的已上市／挂牌案例（115 家）">3.1</a><a href="#sec-3-2" title="3.2 投资界可查的未上市在投项目（5 家，均为二手来源）">3.2</a><a href="#sec-3-3" title="3.3 与你这条业务直接相关的三个关键主体">3.3</a></div></div><div class="toc-item"><a class="toc-l2" href="#s5">4. 优先级排序（金字塔 × 可交易性）</a></div><div class="toc-item"><a class="toc-l2" href="#s6">5. 风险清单</a></div><div class="toc-item"><a class="toc-l2" href="#s7">6. 数据边界与下一步获取路径</a></div><div class="toc-item"><a class="toc-l2" href="#s8">7. 尽调提问清单（直接可问）</a></div><div class="toc-item"><a class="toc-l2" href="#s9">8. 来源</a></div></div></nav>
+
+<ul>
+<li>编制日期：2026-09-29（修订版，取代 09-29 早间版）</li>
+<li>数据口径：仅公开信息。<strong>一手</strong>＝官网／交易所／股转系统／公司公告原文；<strong>二手</strong>＝权威媒体或第三方数据库；<strong>推断</strong>＝由公开数据推导，须访谈验证</li>
+<li>性质：研究备忘，不构成投资建议</li>
+</ul>
+<span class="anchor" id="sec-0"></span><h2 class="sec" id="s1"><span class="no">0</span>0. 一页结论</h2>
+<ol>
+<li><strong>"九鼎投资的所有企业"在公开渠道无法穷尽</strong>。九鼎官网只公开"已上市案例"（历史累计口径，逐条可点），年报／经营简报只披露金额与项目个数，未上市在投项目不公开。官方自己的口径是"累计投资超 360 家"（官网概况页最新为 369 家）。本清单的边界因此是：<strong>官网已上市／挂牌案例 115 家 + 投资界可查的未上市在投项目 5 家 + 3 个与你这条业务直接相关的主体（中迅农科、华日通讯、同创九鼎）</strong>。其余项目只能靠基金层面穿透取得，见第 6 节。</li>
+</ol>
+<ol>
+<li><strong>名单里的绝大多数，已经不是九鼎手里的资产</strong>。截至 2026-06-30，九鼎"<strong>已上市及新三板挂牌但尚未完全退出</strong>"的项目只有 <strong>11 个、投资本金 15.55 亿元</strong>；而"<strong>已确定退出计划但尚未完全退出</strong>"的项目是 <strong>0 个</strong>。这 115 家是历史成绩单，那 11 家才是真正可谈的老股池（公告未点名，是最大缺口）。</li>
+</ol>
+<ol>
+<li><strong>金字塔排序要看清它到底在排什么</strong>。这张图排的是企业创新成长资质（单项冠军＞重点小巨人＞小巨人＞高企……），<strong>不是投资价值</strong>。层级高不等于 ①九鼎仍持股 ②能退出 ③值得买。三者必须分开看，本报告把"资质层级"和"可交易性／退出通道"做成了两条独立坐标。</li>
+</ol>
+<ol>
+<li><strong>本次核验最有价值的两个负面发现</strong>：</li>
+</ol>
+<ul>
+<li>公告口径下，<strong>2026 年上半年在管基金参股项目中"无一家获得沪深北交易所 IPO 审核通过"</strong>，1—6 月完全退出仅 1 个（本金 0.60 亿、收回 1.51 亿），二季度单季完全退出 <strong>0 个</strong>。用"2 年 IPO 退出"讲故事，与九鼎近两年的实际节奏不符。</li>
+<li><strong>爱企查／企查查的"制造业单项冠军企业"标签混装了省级与国家级</strong>。本次抽查 6 家，其中惠达卫浴（河北省级）、广生堂（福建省级第八批）、九典制药（2026 年省级）、海泰新光（山东省级第八批）<strong>都是省级</strong>，只有汉宇集团经核实进入<strong>第九批国家级</strong>名单。所以下面凡标"单项冠军（省／国家级待辨）"的，<strong>不能直接当作金字塔第 9 层使用</strong>。</li>
+</ul>
+<ol>
+<li><strong>真正被官方文件点名过的"第 7 层 重点小巨人"</strong>，在九鼎系样本里只有<strong>纳科诺尔</strong>（公司公告确认复核通过第三批国家级专精特新"小巨人"，多家媒体明确称"工信部重点专精特新小巨人"）；鸿辉光通仅有股吧口径提及，列为待核。</li>
+</ol>
+<ol>
+<li><strong>对你这门生意的直接含义</strong>：金字塔可以用来给标的"分堆"，但决定能不能赚钱的是<strong>退出通道 + 交割可行性 + 价格</strong>。九鼎一侧已经出现明确的卖方特征（*ST、立案调查、LP 诉讼、基金到期、公告写明"并购／回购／转让／S 基金"退出），这是议价窗口；但同一批事实也是你最大的交割风险源。</li>
+</ol>
+<span class="anchor" id="sec-1"></span><h2 class="sec" id="s2"><span class="no">1</span>1. 九鼎系当前状态（一手事实，决定议价与风险）</h2>
+<div class="tw"><table><thead><tr><th>事项</th><th>事实</th><th>来源</th></tr></thead><tbody><tr><td>主体</td><td>昆吾九鼎投资控股股份有限公司，600053.SH；核心子公司昆吾九鼎投资管理有限公司</td><td>公司公告／官网</td></tr><tr><td>退市风险警示</td><td>2025 年度净利润为负且扣除后营业收入低于 3 亿元；2026-04-29 停牌，<strong>2026-04-30 起简称变更为 *ST九鼎</strong>，日涨跌幅 5%</td><td>公告 2026-017（2026-04-29）</td></tr><tr><td>立案调查</td><td><strong>2026-09-18 收到证监会《立案告知书》（证监立案字0252026012号）</strong>，事由为 2023—2024 年存货及投资性房地产核算不准确，涉嫌信息披露违法违规</td><td>公告 2026-044（2026-09-19）</td></tr><tr><td>交易所纪律</td><td>2026 年 6 月因 2025 年业绩预告"变脸"被上交所公开谴责</td><td>上交所／媒体（二手）</td></tr><tr><td>实控人</td><td>吴刚被出具《行政处罚决定书》《市场禁入决定书》，<strong>市场禁入 5 年（约至 2028-02）</strong></td><td>证监会决定书、公司公告 2024-02-14</td></tr><tr><td>在管规模</td><td>截至 2026-06-30：在管基金累计实缴 <strong>247.68 亿元</strong>、剩余实缴 63.82 亿元；在管项目剩余投资本金 <strong>60.56 亿元</strong></td><td>经营情况简报 2026-036（2026-07-15）</td></tr><tr><td>退出进度</td><td>2026 H1 完全退出 <strong>1 个</strong>（本金 0.60 亿、收回 1.51 亿）；Q2 单季 <strong>0 个</strong>；新增投资 0.93 亿、新增实缴 0；回款 1.68 亿</td><td>同上</td></tr><tr><td>在手可退资产</td><td>期末"已上市及新三板挂牌但尚未完全退出" <strong>11 个 / 本金 15.55 亿元</strong>；"已确定退出计划但尚未完全退出" <strong>0 个</strong></td><td>同上</td></tr><tr><td>官方退出方式</td><td>"<strong>并购、回购、转让、S 基金</strong>等多种方式加快其他存量项目的退出"</td><td>退市风险警示公告第四节</td></tr></tbody></table></div>
+<blockquote><p>一句话：<strong>这是一个被迫卖方的窗口期。</strong> 九鼎自己把"卖"写进了公告；但"卖"的原因，也正是买方要压价和要做风险隔离的理由。</p></blockquote>
+<span class="anchor" id="sec-2"></span><h2 class="sec" id="s3"><span class="no">2</span>2. 金字塔九层：认定口径与本次实测到的坑</h2>
+<div class="tw"><table><thead><tr><th>层级</th><th>名称</th><th>认定主体</th><th>官方查法</th><th>本次实测结论</th></tr></thead><tbody><tr><td>第9层</td><td>单项冠军</td><td>工信部（国家级）／各省工信厅（省级）</td><td>国家级：制造业单项冠军企业名单（已公示至第九批，累计约 1557 家）；省级：各省名单</td><td><strong>坑最大</strong>：爱企查／企查查把省级与国家级混为"制造业单项冠军企业"一个标签。抽查 6 家，5 家实为省级</td></tr><tr><td>第8层</td><td>隐形冠军</td><td><strong>无官方认定</strong></td><td>—</td><td>源自赫尔曼·西蒙概念，国内只有媒体榜单；本次仅江山欧派被第三方提及，不作为硬证据</td></tr><tr><td>第7层</td><td>重点"小巨人"</td><td>工信部 + 财政部</td><td>由国家级小巨人中"优中选优"、中央财政重点支持，按批公示（各省分别发名单）</td><td>本次定向核验 14 家，<strong>仅纳科诺尔获硬证据</strong></td></tr><tr><td>第6层</td><td>独角兽</td><td>无官方认定</td><td>长城战略咨询／胡润等榜单</td><td>本次仅奈雪的茶（深圳市品道餐饮）被第三方标记</td></tr><tr><td>第5层</td><td>瞪羚企业</td><td>地方科技部门</td><td>各地名单</td><td>本次命中 3 家：雷电微力、闪送（北京同城必应）、欣盛半导体（未上市）</td></tr><tr><td>第4层</td><td>"小巨人"</td><td>工信部</td><td>国家级专精特新"小巨人"名单（已公示至第七批）</td><td>本次命中 <strong>11 家</strong>，是中间层里最硬的证据</td></tr><tr><td>第3层</td><td>高新技术企业／专精特新中小企业</td><td>科技部等／省级工信部门</td><td>高企认定名单、各省专精特新中小企业名单</td><td>覆盖面最广（高企 72 家、专精特新中小企业 38 家），区分度低</td></tr><tr><td>第2层</td><td>科技型中小企业／创新型中小企业</td><td>科技部入库／省级</td><td>评价系统与各省名单</td><td>18 家命中"创新型中小企业"</td></tr><tr><td>第1层</td><td>中小企业</td><td>—</td><td>—</td><td>基础层级，无认定意义</td></tr></tbody></table></div>
+<blockquote><p><strong>方法说明</strong>：本次分层用"证券代码锚定公司卡片"的方式，从爱企查逐家抓取资质标签（123 个主体全覆盖，脚本与原始输出已存档 <code>tmp/jiuding/tag-full.tsv</code>），再对第 4／7／9 层做定向回原文核验。<strong>爱企查卡片只展示部分标签</strong>，因此"无公开资质标签"只能理解为"未在检索卡片显示"，不等于该公司没有资质。</p></blockquote>
+<span class="anchor" id="sec-3"></span><h2 class="sec" id="s4"><span class="no">3</span>3. 全量清单（按金字塔层级排序）</h2>
+<span class="anchor" id="sec-3-1"></span><h3>3.1 官网披露的已上市／挂牌案例（115 家）</h3>
+<p>排序规则：先按金字塔层级（第 7 层 → 第 9 层 → 第 4 层 → 第 3 层 → 第 2 层 → 无标签），同层内按交易市场（A 股 → 北交所 → 新三板 → 港股／美股 → 已摘牌）。 <strong>注意</strong>：本表列示的是九鼎<strong>历史累计</strong>已上市／挂牌案例，<strong>不等于九鼎当前仍持有</strong>。</p>
+<div class="tw"><table><thead><tr><th>#</th><th>企业</th><th>代码</th><th>当前资本市场状态</th><th>金字塔层级（九层口径）</th><th>备注</th></tr></thead><tbody><tr><td>1</td><td>纳科诺尔</td><td>832522</td><td>北交所</td><td>第7层 重点“小巨人”</td><td>已核：公司公告复核通过第三批国家级专精特新小巨人，多家媒体称“工信部重点专精特新小巨人”</td></tr><tr><td>2</td><td>鸿辉光通</td><td>832063</td><td>新三板挂牌中</td><td>第7层 重点小巨人（待核）</td><td>股转系统；仅股吧口径，未拿到官方名单，不能作为硬证据</td></tr><tr><td>3</td><td>江山欧派</td><td>603208</td><td>A股·上交所主板</td><td>制造业单项冠军（省/国家级待辨） + 第8层 隐形冠军 + 第3层 高新技术企业 + 第3层 专精特新中小企业</td><td></td></tr><tr><td>4</td><td>科林电气</td><td>603050</td><td>A股·上交所主板</td><td>制造业单项冠军（省/国家级待辨） + 第3层 高新技术企业</td><td></td></tr><tr><td>5</td><td>维力医疗</td><td>603309</td><td>A股·上交所主板</td><td>制造业单项冠军（省/国家级待辨） + 第3层 高新技术企业 + 附加 企业技术中心</td><td></td></tr><tr><td>6</td><td>荣泰健康</td><td>603579</td><td>A股·上交所主板</td><td>制造业单项冠军（省/国家级待辨） + 第3层 高新技术企业 + 第3层 专精特新中小企业 + 附加 企业技术中心</td><td></td></tr><tr><td>7</td><td>辰欣药业</td><td>603367</td><td>A股·上交所主板</td><td>制造业单项冠军（省/国家级待辨） + 第3层 高新技术企业</td><td></td></tr><tr><td>8</td><td>金能科技</td><td>603113</td><td>A股·上交所主板</td><td>制造业单项冠军（省/国家级待辨） + 第3层 高新技术企业</td><td></td></tr><tr><td>9</td><td>昊志机电</td><td>300503</td><td>A股·创业板</td><td>制造业单项冠军（省/国家级待辨） + 第3层 高新技术企业 + 附加 企业技术中心</td><td></td></tr><tr><td>10</td><td>星源材质</td><td>300568</td><td>A股·创业板</td><td>制造业单项冠军（省/国家级待辨） + 第3层 高新技术企业</td><td></td></tr><tr><td>11</td><td>汉宇集团</td><td>300403</td><td>A股·创业板</td><td>第9层 国家级制造业单项冠军</td><td>已核：第九批国家级制造业单项冠军公示名单（2025-11）</td></tr><tr><td>12</td><td>润丰股份</td><td>301035</td><td>A股·创业板</td><td>制造业单项冠军（省/国家级待辨） + 第3层 高新技术企业 + 附加 企业技术中心</td><td></td></tr><tr><td>13</td><td>奔朗新材</td><td>836807</td><td>北交所</td><td>制造业单项冠军（省/国家级待辨） + 第3层 高新技术企业 + 第3层 专精特新中小企业 + 第2层 创新型中小企业 + 附加 企业技术中心</td><td></td></tr><tr><td>14</td><td>派诺科技</td><td>831175</td><td>北交所</td><td>制造业单项冠军（省/国家级待辨） + 第3层 高新技术企业 + 第3层 专精特新中小企业 + 第2层 创新型中小企业 + 附加 企业技术中心</td><td></td></tr><tr><td>15</td><td>华特磁电</td><td>831387</td><td>新三板挂牌中</td><td>制造业单项冠军（省/国家级待辨） + 第3层 高新技术企业 + 第2层 创新型中小企业 + 附加 企业技术中心</td><td>股转系统</td></tr><tr><td>16</td><td>合佳医药</td><td>838641</td><td>新三板挂牌中</td><td>制造业单项冠军（省/国家级待辨） + 第3层 高新技术企业 + 第3层 专精特新中小企业</td><td>股转系统</td></tr><tr><td>17</td><td>百川导体</td><td>832852</td><td>新三板挂牌中</td><td>制造业单项冠军（省/国家级待辨） + 第3层 高新技术企业 + 第3层 专精特新中小企业</td><td>股转系统</td></tr><tr><td>18</td><td>奈雪的茶</td><td>02150.HK</td><td>港股</td><td>第6层 独角兽</td><td></td></tr><tr><td>19</td><td>闪送</td><td>FLX.US</td><td>美股（未逐一核实）</td><td>第5层 瞪羚企业 + 第3层 高新技术企业 + 第3层 专精特新中小企业</td><td>官网列入已上市案例；未做行情核验</td></tr><tr><td>20</td><td>富祥药业</td><td>300497</td><td>A股·创业板</td><td>第4层 国家级专精特新小巨人 + 第3层 专精特新中小企业 + 附加 企业技术中心</td><td>富祥股份；富祥药业→富祥股份</td></tr><tr><td>21</td><td>达威股份</td><td>300535</td><td>A股·创业板</td><td>第4层 国家级专精特新小巨人 + 第3层 高新技术企业</td><td></td></tr><tr><td>22</td><td>雷电微力</td><td>301050</td><td>A股·创业板</td><td>第4层 国家级专精特新小巨人 + 第5层 瞪羚企业 + 第3层 高新技术企业</td><td></td></tr><tr><td>23</td><td>华东重机</td><td>002685</td><td>A股·深交所主板</td><td>第4层 国家级专精特新小巨人 + 第3层 高新技术企业 + 第3层 专精特新中小企业 + 第2层 创新型中小企业</td><td></td></tr><tr><td>24</td><td>雅克科技</td><td>002409</td><td>A股·深交所主板</td><td>第4层 国家级专精特新小巨人 + 第3层 高新技术企业 + 第2层 创新型中小企业</td><td></td></tr><tr><td>25</td><td>天微电子</td><td>688511</td><td>A股·科创板</td><td>第4层 国家级专精特新小巨人 + 第3层 高新技术企业</td><td></td></tr><tr><td>26</td><td>海泰新光</td><td>688677</td><td>A股·科创板</td><td>第4层 国家级专精特新小巨人</td><td>小巨人成立；单项冠军为山东省第八批省级，不计入第9层</td></tr><tr><td>27</td><td>世优电气</td><td>830827</td><td>新三板挂牌中</td><td>第4层 国家级专精特新小巨人 + 第3层 高新技术企业</td><td>股转系统</td></tr><tr><td>28</td><td>华菱精工</td><td>603356</td><td>A股·上交所主板</td><td>第3层 高新技术企业 + 第3层 专精特新中小企业 + 附加 企业技术中心</td><td></td></tr><tr><td>29</td><td>嘉化能源</td><td>600273</td><td>A股·上交所主板</td><td>第3层 高新技术企业 + 附加 企业技术中心</td><td></td></tr><tr><td>30</td><td>尚纬股份</td><td>603333</td><td>A股·上交所主板</td><td>第3层 高新技术企业 + 第3层 专精特新中小企业 + 第2层 创新型中小企业</td><td>福华尚纬；尚纬股份→福华尚纬</td></tr><tr><td>31</td><td>建设机械</td><td>600984</td><td>A股·上交所主板</td><td>第3层 高新技术企业 + 第2层 创新型中小企业</td><td></td></tr><tr><td>32</td><td>方盛制药</td><td>603998</td><td>A股·上交所主板</td><td>第3层 高新技术企业</td><td></td></tr><tr><td>33</td><td>诚意药业</td><td>603811</td><td>A股·上交所主板</td><td>第3层 高新技术企业 + 第3层 专精特新中小企业</td><td></td></tr><tr><td>34</td><td>中旗股份</td><td>300575</td><td>A股·创业板</td><td>第3层 高新技术企业</td><td></td></tr><tr><td>35</td><td>中颖电子</td><td>300327</td><td>A股·创业板</td><td>第3层 高新技术企业 + 附加 企业技术中心</td><td></td></tr><tr><td>36</td><td>启迪设计</td><td>300500</td><td>A股·创业板</td><td>第3层 高新技术企业 + 第3层 专精特新中小企业</td><td></td></tr><tr><td>37</td><td>大宏立</td><td>300865</td><td>A股·创业板</td><td>第3层 高新技术企业</td><td></td></tr><tr><td>38</td><td>尔康制药</td><td>300267</td><td>A股·创业板</td><td>第3层 高新技术企业</td><td></td></tr><tr><td>39</td><td>欧普康视</td><td>300595</td><td>A股·创业板</td><td>第3层 高新技术企业 + 第3层 专精特新中小企业 + 第2层 创新型中小企业 + 附加 企业技术中心</td><td></td></tr><tr><td>40</td><td>泰禾股份</td><td>301665</td><td>A股·创业板</td><td>第3层 高新技术企业 + 第3层 专精特新中小企业 + 第2层 创新型中小企业</td><td></td></tr><tr><td>41</td><td>融捷健康</td><td>300247</td><td>A股·创业板</td><td>第3层 高新技术企业 + 附加 企业技术中心</td><td></td></tr><tr><td>42</td><td>飞天诚信</td><td>300386</td><td>A股·创业板</td><td>第3层 高新技术企业 + 附加 企业技术中心</td><td></td></tr><tr><td>43</td><td>众兴菌业</td><td>002772</td><td>A股·深交所主板</td><td>第3层 高新技术企业</td><td></td></tr><tr><td>44</td><td>川恒股份</td><td>002895</td><td>A股·深交所主板</td><td>第3层 高新技术企业</td><td></td></tr><tr><td>45</td><td>朗姿股份</td><td>002612</td><td>A股·深交所主板</td><td>第3层 高新技术企业 + 附加 企业技术中心</td><td></td></tr><tr><td>46</td><td>永东股份</td><td>002753</td><td>A股·深交所主板</td><td>第3层 高新技术企业</td><td></td></tr><tr><td>47</td><td>盘龙药业</td><td>002864</td><td>A股·深交所主板</td><td>第3层 专精特新中小企业</td><td></td></tr><tr><td>48</td><td>罗莱生活</td><td>002293</td><td>A股·深交所主板</td><td>第3层 高新技术企业</td><td></td></tr><tr><td>49</td><td>金杯电工</td><td>002533</td><td>A股·深交所主板</td><td>第3层 高新技术企业</td><td></td></tr><tr><td>50</td><td>长江材料</td><td>001296</td><td>A股·深交所主板</td><td>第3层 专精特新中小企业 + 附加 企业技术中心</td><td></td></tr><tr><td>51</td><td>龙佰集团</td><td>002601</td><td>A股·深交所主板</td><td>第3层 高新技术企业</td><td></td></tr><tr><td>52</td><td>正帆科技</td><td>688596</td><td>A股·科创板</td><td>第3层 高新技术企业 + 第3层 专精特新中小企业 + 附加 企业技术中心</td><td></td></tr><tr><td>53</td><td>安达科技</td><td>830809</td><td>北交所</td><td>第3层 高新技术企业</td><td></td></tr><tr><td>54</td><td>华建云鼎</td><td>837065</td><td>新三板已摘牌/未查到</td><td>第3层 高新技术企业 + 第3层 专精特新中小企业</td><td>股转行情接口无返回</td></tr><tr><td>55</td><td>希德电子</td><td>833477</td><td>新三板已摘牌/未查到</td><td>第3层 高新技术企业</td><td>股转行情接口无返回</td></tr><tr><td>56</td><td>曙光电缆</td><td>832292</td><td>新三板已摘牌/未查到</td><td>第3层 高新技术企业 + 第3层 专精特新中小企业 + 第2层 创新型中小企业</td><td>股转行情接口无返回</td></tr><tr><td>57</td><td>万隆制药</td><td>873617</td><td>新三板挂牌中</td><td>第3层 高新技术企业</td><td>股转系统</td></tr><tr><td>58</td><td>中棉种业</td><td>832019</td><td>新三板挂牌中</td><td>第3层 高新技术企业 + 第3层 专精特新中小企业 + 第2层 科技型中小企业</td><td>股转系统</td></tr><tr><td>59</td><td>九洲光电</td><td>830995</td><td>新三板挂牌中</td><td>第3层 高新技术企业 + 第3层 专精特新中小企业</td><td>股转系统</td></tr><tr><td>60</td><td>伊普诺康</td><td>835852</td><td>新三板挂牌中</td><td>第3层 高新技术企业 + 第3层 专精特新中小企业 + 第2层 创新型中小企业 + 附加 企业技术中心</td><td>股转系统</td></tr><tr><td>61</td><td>凌志环保</td><td>831068</td><td>新三板挂牌中</td><td>第3层 高新技术企业 + 第3层 专精特新中小企业 + 第2层 创新型中小企业</td><td>凌志装备；股转系统</td></tr><tr><td>62</td><td>华盛新材</td><td>871342</td><td>新三板挂牌中</td><td>第3层 高新技术企业 + 第3层 专精特新中小企业 + 第2层 创新型中小企业</td><td>股转系统</td></tr><tr><td>63</td><td>威门药业</td><td>430369</td><td>新三板挂牌中</td><td>第3层 专精特新中小企业</td><td>股转系统</td></tr><tr><td>64</td><td>巴山牧业</td><td>872245</td><td>新三板挂牌中</td><td>第3层 高新技术企业 + 第3层 专精特新中小企业 + 第2层 科技型中小企业</td><td>股转系统</td></tr><tr><td>65</td><td>德信股份</td><td>832749</td><td>新三板挂牌中</td><td>第3层 高新技术企业 + 第3层 专精特新中小企业 + 第2层 创新型中小企业</td><td>股转系统</td></tr><tr><td>66</td><td>方林科技</td><td>430432</td><td>新三板挂牌中</td><td>第3层 高新技术企业 + 第3层 专精特新中小企业 + 第2层 创新型中小企业</td><td>股转系统</td></tr><tr><td>67</td><td>海鑫科金</td><td>430021</td><td>新三板挂牌中</td><td>第3层 高新技术企业 + 第3层 专精特新中小企业 + 附加 企业技术中心</td><td>股转系统</td></tr><tr><td>68</td><td>电科电源</td><td>831373</td><td>新三板挂牌中</td><td>第3层 高新技术企业</td><td>股转系统</td></tr><tr><td>69</td><td>紫竹慧</td><td>834243</td><td>新三板挂牌中</td><td>第3层 高新技术企业</td><td>股转系统</td></tr><tr><td>70</td><td>惠达卫浴</td><td>603385</td><td>A股·上交所主板</td><td>单项冠军（省级）</td><td>河北省单项冠军，非国家级；爱企查标签混用 资质层级已降级</td></tr><tr><td>71</td><td>九典制药</td><td>300705</td><td>A股·创业板</td><td>单项冠军（省级）</td><td>2026年省级制造业单项冠军；爱企查标签混用 资质层级已降级</td></tr><tr><td>72</td><td>广生堂</td><td>300436</td><td>A股·创业板</td><td>单项冠军（省级）</td><td>福建省第八批省级单项冠军（2024-09） 资质层级已降级</td></tr><tr><td>73</td><td>三峰环境</td><td>601827</td><td>A股·上交所主板</td><td>附加 企业技术中心</td><td>资质层级已降级</td></tr><tr><td>74</td><td>天风证券</td><td>601162</td><td>A股·上交所主板</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>75</td><td>新天然气</td><td>603393</td><td>A股·上交所主板</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>76</td><td>新疆火炬</td><td>603080</td><td>A股·上交所主板</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>77</td><td>柳药股份</td><td>603368</td><td>A股·上交所主板</td><td>无公开资质标签</td><td>柳药集团；柳药股份→柳药集团 资质层级已降级</td></tr><tr><td>78</td><td>浙文互联</td><td>600986</td><td>A股·上交所主板</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>79</td><td>绝味食品</td><td>603517</td><td>A股·上交所主板</td><td>无公开资质标签</td><td>ST绝味；<strong>ST</strong> 资质层级已降级</td></tr><tr><td>80</td><td>莲花健康</td><td>600186</td><td>A股·上交所主板</td><td>无公开资质标签</td><td>莲花控股；莲花健康→莲花控股 资质层级已降级</td></tr><tr><td>81</td><td>蓝天燃气</td><td>605368</td><td>A股·上交所主板</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>82</td><td>博士眼镜</td><td>300622</td><td>A股·创业板</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>83</td><td>吉峰科技</td><td>300022</td><td>A股·创业板</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>84</td><td>玉禾田</td><td>300815</td><td>A股·创业板</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>85</td><td>侨源气体</td><td>300646</td><td>A股·创业板(代码已变更)</td><td>无公开资质标签</td><td>侨源股份；现代码 301286 资质层级已降级</td></tr><tr><td>86</td><td>万邦德</td><td>002082</td><td>A股·深交所主板</td><td>无公开资质标签</td><td>ST万邦；<strong>ST</strong> 资质层级已降级</td></tr><tr><td>87</td><td>中国宝安</td><td>000009</td><td>A股·深交所主板</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>88</td><td>九鼎新材</td><td>002201</td><td>A股·深交所主板</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>89</td><td>众信旅游</td><td>002707</td><td>A股·深交所主板</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>90</td><td>凤形股份</td><td>002760</td><td>A股·深交所主板</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>91</td><td>利民股份</td><td>002734</td><td>A股·深交所主板</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>92</td><td>富森美</td><td>002818</td><td>A股·深交所主板</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>93</td><td>居然之家</td><td>000785</td><td>A股·深交所主板</td><td>无公开资质标签</td><td>居然智家；居然之家→居然智家 资质层级已降级</td></tr><tr><td>94</td><td>帝欧家居</td><td>002798</td><td>A股·深交所主板</td><td>无公开资质标签</td><td>帝欧水华；帝欧家居→帝欧水华 资质层级已降级</td></tr><tr><td>95</td><td>海南瑞泽</td><td>002596</td><td>A股·深交所主板</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>96</td><td>爱迪尔</td><td>002740</td><td>A股·深交所主板</td><td>无公开资质标签</td><td>*ST爱迪；<strong>*ST</strong> 资质层级已降级</td></tr><tr><td>97</td><td>皇庭国际</td><td>000056</td><td>A股·深交所主板</td><td>无公开资质标签</td><td>*ST皇庭；<strong>*ST</strong> 资质层级已降级</td></tr><tr><td>98</td><td>神州高铁</td><td>000008</td><td>A股·深交所主板</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>99</td><td>红旗连锁</td><td>002697</td><td>A股·深交所主板</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>100</td><td>贝肯能源</td><td>002828</td><td>A股·深交所主板</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>101</td><td>辉丰股份</td><td>002496</td><td>A股·深交所主板</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>102</td><td>东研科技</td><td>831852</td><td>新三板已摘牌/未查到</td><td>无公开资质标签</td><td>股转行情接口无返回 资质层级已降级</td></tr><tr><td>103</td><td>建装业</td><td>832219</td><td>新三板已摘牌/未查到</td><td>无公开资质标签</td><td>股转行情接口无返回 资质层级已降级</td></tr><tr><td>104</td><td>金达照明</td><td>831290</td><td>新三板已摘牌/未查到</td><td>无公开资质标签</td><td>股转行情接口无返回 资质层级已降级</td></tr><tr><td>105</td><td>长联来福</td><td>834239</td><td>新三板已摘牌/未查到</td><td>无公开资质标签</td><td>股转行情接口无返回 资质层级已降级</td></tr><tr><td>106</td><td>威盛电子</td><td>833073</td><td>新三板挂牌中</td><td>无公开资质标签</td><td>股转系统 资质层级已降级</td></tr><tr><td>107</td><td>楚星时尚</td><td>870001</td><td>新三板挂牌中</td><td>无公开资质标签</td><td>股转系统 资质层级已降级</td></tr><tr><td>108</td><td>海航冷链</td><td>831900</td><td>新三板挂牌中</td><td>无公开资质标签</td><td>股转系统 资质层级已降级</td></tr><tr><td>109</td><td>瑞立达</td><td>833290</td><td>新三板挂牌中</td><td>无公开资质标签</td><td>ST瑞立达；<strong>ST</strong>；股转系统 资质层级已降级</td></tr><tr><td>110</td><td>莲池医院</td><td>831672</td><td>新三板挂牌中</td><td>无公开资质标签</td><td>股转系统 资质层级已降级</td></tr><tr><td>111</td><td>辉腾科技</td><td>872505</td><td>新三板挂牌中</td><td>无公开资质标签</td><td>股转系统 资质层级已降级</td></tr><tr><td>112</td><td>中国再保险</td><td>01508.HK</td><td>港股</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>113</td><td>毛戈平</td><td>01318.HK</td><td>港股</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>114</td><td>海底捞</td><td>06862.HK</td><td>港股</td><td>无公开资质标签</td><td>资质层级已降级</td></tr><tr><td>115</td><td>爱德新能源</td><td>02623.HK</td><td>港股</td><td>无公开资质标签</td><td>香港黄金产业集团；爱德新能源→香港黄金产业集团 资质层级已降级</td></tr></tbody></table></div>
+<span class="anchor" id="sec-3-2"></span><h3>3.2 投资界可查的未上市在投项目（5 家，均为二手来源）</h3>
+<div class="tw"><table><thead><tr><th>企业</th><th>轮次／时间</th><th>资质层级（爱企查）</th><th>备注</th></tr></thead><tbody><tr><td>常州欣盛半导体技术股份有限公司</td><td>D+ 轮，2022-12-31</td><td>第5层 瞪羚 + 专精特新中小企业 + 创新型中小企业 + 企业技术中心</td><td>半导体赛道，<strong>本样本中唯一同时具备"未上市 + 瞪羚 + 硬科技"的项目</strong>，IPO／并购双通道</td></tr><tr><td>常州钢研极光增材制造有限公司</td><td>天使轮，2021-12-31</td><td><strong>第4层 国家级专精特新"小巨人"</strong> + 高企 + 专精特新中小企业</td><td>增材制造（金属 3D 打印），央企院所背景</td></tr><tr><td>福建远致环保科技有限公司</td><td>A 轮，2023-06-06</td><td>第3层 高企 + 专精特新中小企业 + 科技型中小企业</td><td>环保</td></tr><tr><td>四川天翼网络股份有限公司</td><td>B 轮，2022-05-11</td><td>第3层 高企</td><td>信息服务</td></tr><tr><td>北京盛拓达生物技术股份有限公司</td><td>A 轮，2022-01-24</td><td>第3层 高企 + 专精特新中小企业</td><td>生物技术</td></tr></tbody></table></div>
+<blockquote><p>说明：这 5 家来自投资界机构档案，<strong>不是九鼎的完整未上市清单</strong>，只是公开可查的少数样本。</p></blockquote>
+<span class="anchor" id="sec-3-3"></span><h3>3.3 与你这条业务直接相关的三个关键主体</h3>
+<div class="tw"><table><thead><tr><th>主体</th><th>与九鼎的关系</th><th>核对到的事实</th><th>置信度</th></tr></thead><tbody><tr><td>广东中迅农科股份有限公司</td><td>九鼎系曾持股，因九鼎股东身份影响上市；<strong>匡思奇已从吴强处受让其股份</strong></td><td>爱企查未显示科技类资质标签；公开股权信息显示<strong>嘉兴嘉昊九鼎仍持有 5.09774%</strong>（口径需以最新工商为准）</td><td>二手／待工商核验</td></tr><tr><td>成都华日通讯技术股份有限公司</td><td>九鼎系 2013 年战略投资方（公开报道约 8430 万元）</td><td><strong>国家级专精特新"小巨人"</strong>（四川官方媒体，2024）；A 股 IPO <strong>辅导备案中</strong>（第二十一期辅导报告，2026-07-10），报告明确"<strong>拟对股权结构进行部分调整</strong>"</td><td>辅导报告为一手，投资额属二手</td></tr><tr><td>同创九鼎投资管理集团股份有限公司</td><td>九鼎系母公司层面主体</td><td>爱企查未显示科技类资质标签；属"卖方主体"而非标的</td><td>一手</td></tr></tbody></table></div>
+<blockquote><p><strong>这两个名字才是与"Pre-IPO 老股"逻辑最贴合的对象</strong>：华日通讯处在辅导期且有股权调整意愿（存在可交易窗口），中迅农科已出现"去九鼎化"的实操先例（匡思奇收购）。但它们同时也是"九鼎历史投资、是否仍有可转让份额需穿透核实"的两家——<strong>不能因为过去投过就默认现在有票可买</strong>。</p></blockquote>
+<span class="anchor" id="sec-4"></span><h2 class="sec" id="s5"><span class="no">4</span>4. 优先级排序（金字塔 × 可交易性）</h2>
+<p>金字塔只回答"企业资质好不好"。下面这版排序把金字塔层级和你的真实生意（<strong>买老股 → 2 年内 IPO 或卖给上市公司</strong>）叠在一起，分成四档 + 两档排除。</p>
+<h3>P0｜唯一真正的老股池：那 11 个"已上市/挂牌但尚未完全退出"的项目（本金 15.55 亿元）</h3>
+<ul>
+<li><strong>为什么是第一优先</strong>：只有这 11 个是"九鼎手里现在还拿着、且已经进入可流通／可挂牌状态"的资产。115 家名单里其余部分，九鼎大概率已减持或完全退出。</li>
+<li><strong>怎么拿</strong>：2026 年半年度报告正文、基金年度报告、或直接向管理人索取基金资产包清单（公告未逐一点名）。</li>
+<li><strong>风险</strong>：公告同时显示"<strong>已确定退出计划但尚未完全退出 = 0 个</strong>"，意味着这 11 个连九鼎自己都没有明确的退出时间表——这是对"2 年退出"最直接的负面证据。</li>
+</ul>
+<h3>P1｜金字塔高层级 + 资本市场路径清晰（可优先访谈）</h3>
+<div class="tw"><table><thead><tr><th>标的</th><th>代码／状态</th><th>金字塔层级</th><th>为什么排这里</th><th>关键不确定</th></tr></thead><tbody><tr><td>纳科诺尔</td><td>832522，北交所</td><td><strong>第7层 重点"小巨人"</strong> + 国家级小巨人 + 单项冠军（待辨）</td><td>全样本<strong>唯一</strong>被硬证据支撑的第 7 层，锂电辊压设备细分龙头，北交所已上市（可交易、可测算折价）</td><td>九鼎是否仍持股；北交所流动性与减持规则</td></tr><tr><td>汉宇集团</td><td>300403，创业板</td><td><strong>第9层 国家级制造业单项冠军</strong>（第九批）</td><td>全样本唯一经核实进入国家级单项冠军名单的企业</td><td>九鼎大概率已退出，属"看得到买不到"的一类</td></tr><tr><td>海泰新光</td><td>688677，科创板</td><td><strong>第4层 国家级小巨人</strong>（另有省级单项冠军）</td><td>硬科技、科创板、资质齐</td><td>估值高、九鼎持股需穿透</td></tr><tr><td>常州欣盛半导体</td><td>未上市，D+ 轮</td><td>第5层 瞪羚 + 专精特新</td><td><strong>未上市 + 半导体 + 瞪羚</strong>，是"并购退出"逻辑最顺的一类</td><td>需核实九鼎持股与最近一轮估值</td></tr><tr><td>常州钢研极光</td><td>未上市，天使轮</td><td><strong>第4层 国家级小巨人</strong></td><td>未上市 + 国家级小巨人 + 央企院所背景，并购价值明确</td><td>九鼎持股比例可能很小</td></tr><tr><td>华日通讯</td><td>辅导备案中（拟调整股权结构）</td><td>国家级小巨人</td><td><strong>有明确的资本市场动作 + 股权调整意愿</strong>，是"Pre-IPO 老股"最标准的标的</td><td>是否仍有九鼎份额；军品业务与同业竞争问题已解但需复核</td></tr><tr><td>雷电微力</td><td>301050，创业板</td><td>第4层 小巨人 + 第5层 瞪羚</td><td>军民两用微波器件，双资质</td><td>上市公司层面已无老股机会</td></tr><tr><td>达威股份／富祥药业／华东重机／天微电子／雅克科技</td><td>300535／300497／002685／688511／002409</td><td>第4层 小巨人</td><td>第 4 层里资质最硬的一批</td><td>均已上市，须先确认九鼎是否仍有持股</td></tr><tr><td>世优电气</td><td>830827，新三板挂牌中</td><td>第4层 小巨人</td><td><strong>国家级小巨人 + 新三板挂牌</strong>：股东名册公开，最容易低成本取证</td><td>新三板流动性差，退出依赖并购</td></tr><tr><td>百川导体</td><td>832852，新三板挂牌中</td><td>高企 + 专精特新中小企业 + 单项冠军（待辨）</td><td>新三板挂牌 + 单项冠军线索</td><td>单项冠军层级待辨</td></tr><tr><td>派诺科技</td><td>831175，北交所</td><td>单项冠军（待辨）+ 专精特新</td><td>北交所已上市</td><td>九鼎持股需核实</td></tr></tbody></table></div>
+<h3>P2｜24 家新三板仍挂牌企业：<strong>取证成本最低的一档</strong></h3>
+<p>完整 24 家名单见下表状态列为"新三板挂牌中"的行，或 <code>tmp/jiuding/capital-status.md</code> 第 2.2 节（含巴山牧业、百川导体、楚星时尚、德信股份、世优电气等）。 <strong>价值不在资质，而在"公开股东名册"</strong>——这是唯一能在不依赖九鼎配合的情况下，先自行确认"九鼎到底还持不持股、持多少"的一档。建议把它们当作<strong>证据采集池</strong>，而不是投资池。</p>
+<h3>P3｜ST／*ST 标的：高折价、高退市风险</h3>
+<p>爱迪尔（*ST爱迪）、皇庭国际（*ST皇庭）、绝味食品（ST绝味）、万邦德（ST万邦），另有新三板 ST瑞立达。 <strong>逻辑</strong>：九鼎更可能被迫低价处置；<strong>风险</strong>：受让方要承接退市与赔偿风险，"便宜"很可能就是"贵"。</p>
+<h3>排除／降级</h3>
+<ul>
+<li><strong>7 家已查不到挂牌记录</strong>：长联来福、东研科技、华建云鼎、建装业、金达照明、曙光电缆、希德电子——可能已摘牌或代码变更，不能当可交易资产。</li>
+<li><strong>港股 5 家、美股 1 家</strong>：老股通道、锁定期与受让方资格都与 A 股不同，且九鼎多半已退出，性价比低。</li>
+<li><strong>无公开资质标签的 41 家</strong>（海底捞、绝味食品、天风证券、中国宝安、居然之家等）：多为消费／金融／传统行业，与金字塔前 7 层无关，且基本已退出。</li>
+</ul>
+<span class="anchor" id="sec-5"></span><h2 class="sec" id="s6"><span class="no">5</span>5. 风险清单</h2>
+<p><strong>A. 交易结构风险（最容易被低估）</strong></p>
+<ol>
+<li>九鼎系项目大多挂在<strong>有限合伙基金</strong>名下：份额转让需 <strong>GP 同意 + LP 协议允许</strong>，还可能触发其他 LP 的优先受让权；直接买底层股权则可能触发标的公司其他股东的优先购买权。</li>
+<li><strong>多层合伙穿透</strong>：从基金到标的可能嵌套 2—3 层，任何一层 LP 不配合，交易就卡住。</li>
+<li><strong>对赌／回购／特殊权利未清理</strong>：老股受让方常常要承接历史义务。</li>
+<li><strong>兜底条款效力</strong>："上市公司老板担保兜底"在司法实践中可能因违反公司法关于回购／担保的限制而被认定无效，必须逐案设计（例如改为差额补足 + 质押 + 实控人个人连带）。</li>
+</ol>
+<p><strong>B. 卖方（九鼎）风险</strong></p>
+<ol>
+<li><strong>*ST + 立案调查未结</strong>（2026-09-18 立案）：处置节奏可能更慢，部分交易需前置监管沟通。</li>
+<li><strong>LP 压力</strong>：已有 LP 起诉解散基金的公开案例，签署主体与实际决策人可能不一致。</li>
+<li><strong>基金到期／进入清算</strong>：决定"谁有权签字"和"多急"，也决定了折价空间。</li>
+<li><strong>好资产先被卖掉的可能</strong>：管理费收入已近归零，九鼎对现金极度饥渴——这既是低价机会，也意味着你看到的池子可能已被筛过一遍。</li>
+</ol>
+<p><strong>C. 标的侧风险</strong></p>
+<ol>
+<li><strong>资质标签 ≠ 投资价值</strong>：单项冠军／小巨人只说明资质，不说明成长性、不说明退出确定性。本次已实测出"省级被当成第 9 层"的系统性误差。</li>
+<li><strong>投后估值虚高</strong>：需对比九鼎成本价与最近一轮外部融资价，识别"账面估值高、无流动性"的项目。</li>
+<li><strong>股权瑕疵</strong>：质押、司法冻结、代持、股东涉敏感身份（历史上"涉九鼎系而 IPO 搁浅"确有公开案例）。</li>
+</ol>
+<p><strong>D. 你自己的模式风险</strong></p>
+<ol>
+<li><strong>"2 年退出"缺乏现实支撑</strong>：九鼎 2026H1 IPO 过会 0 家、完全退出 1 个、并购大案例（大北农拟 13.2 亿收购湖南九鼎科技）以终止收场。<strong>给投资人的固定收益＋超额分成承诺，必须建立在"能退出"的前提上，否则变成刚性兑付风险。</strong></li>
+<li><strong>收益分配结构倒推</strong>：5000 万 × 5%/年 = 250 万/年固定；超额部分资金方 50%、你 20%、匡 10%、吴强 20%。<strong>关键在于退出倍数假设</strong>——3—5 倍与 10 倍的差距，直接决定 2 年内能否覆盖固定收益。做财务模型时必须同时给出"仅 1.5 倍""无法退出"两种压力情景。</li>
+</ol>
+<span class="anchor" id="sec-6"></span><h2 class="sec" id="s7"><span class="no">6</span>6. 数据边界与下一步获取路径</h2>
+<p><strong>公开渠道的硬边界</strong></p>
+<ul>
+<li>九鼎官网只有"已上市案例"一栏，<strong>不披露未上市在投项目</strong>。</li>
+<li>定期报告与经营简报只披露<strong>金额与项目个数</strong>，不点名。</li>
+<li>巨潮资讯全文检索对"昆吾九鼎"的命中几乎只有九鼎投资自身的公告（实测 6 页均为 600053），<strong>无法据此反查被投企业</strong>。</li>
+<li>因此"九鼎在管项目完整名单"属<strong>非公开信息</strong>，只能通过下列三条路取得。</li>
+</ul>
+<p><strong>三条获取路径（按性价比排序）</strong></p>
+<ol>
+<li><strong>向 GP／管理人索取基金资产包清单</strong>：项目名称、持股主体、持股比例、投资成本、投后估值、退出计划、基金到期日。这是唯一能一次性补齐的方式。</li>
+<li><strong>工商穿透</strong>：对九鼎系各只有限合伙基金做"对外投资"穿透（爱企查／天眼查），可还原大部分未上市持股。成本是时间，不是钱。</li>
+<li><strong>反向检索</strong>：在巨潮按"辅导备案 + 股东名单"逐个比对（如华日通讯的辅导进展报告），以及从新三板挂牌公司的公开股东名册反查九鼎系基金。</li>
+</ol>
+<p><strong>本次已落盘的证据（可复核）</strong></p>
+<div class="tw"><table><thead><tr><th>文件</th><th>内容</th></tr></thead><tbody><tr><td><code>tmp/jiuding/tag-full.tsv</code></td><td>123 个主体的爱企查资质打标原始输出（证券代码锚定）</td></tr><tr><td><code>tmp/jiuding/tier-summary.tsv</code></td><td>分层汇总（含锚定方式与可疑行标注）</td></tr><tr><td><code>tmp/jiuding/capital-status.md</code></td><td>115 家已上市案例的当前市场状态（逐条行情核验）</td></tr><tr><td><code>tmp/jiuding/bing-keygiant.tsv</code></td><td>重点小巨人定向核验原始检索结果</td></tr><tr><td><code>tmp/jiuding/bing-champion.tsv</code>、<code>bing-champion2.tsv</code></td><td>单项冠军省级／国家级抽查证据</td></tr><tr><td><code>tools/aiq_tags2.py</code>、<code>tools/cninfo_ft.py</code>、<code>tools/bing_probe.py</code></td><td>可复跑的采集脚本</td></tr></tbody></table></div>
+<span class="anchor" id="sec-7"></span><h2 class="sec" id="s8"><span class="no">7</span>7. 尽调提问清单（直接可问）</h2>
+<p><strong>对九鼎／GP</strong></p>
+<ol>
+<li>请提供截至最近月末的在投项目清单：项目名称、持股主体、持股比例、投资成本、最新账面估值、退出计划。</li>
+<li><strong>那 11 个"已上市及新三板挂牌但尚未完全退出"的项目分别是哪几家？</strong> 各项目剩余可转让份额与锁定期安排？</li>
+<li>为什么公告显示"已确定退出计划但尚未完全退出的项目为 0 个"？公司内部对资金回笼的时间要求是什么？</li>
+<li>各只基金的存续期、到期日、是否进入清算期？LP 对折价转让的态度？是否有 LP 已提起解散之诉？</li>
+<li>转让需要哪些内部与外部批准？是否存在优先购买权、共售权、跟售权？</li>
+<li>立案调查对项目股权处置是否有影响？是否需提前与监管沟通？</li>
+</ol>
+<p><strong>对拟收购标的</strong></p>
+<ol>
+<li>最近三年营业收入、净利润、毛利率、经营现金流；最近一轮外部融资的时间、估值与投资方。</li>
+<li>上市计划：是否已辅导备案、申报板块、预计时间表；若走并购，意向买方是谁、接触进展如何？</li>
+<li>股权是否质押、冻结、代持？是否存在未解除的对赌／回购义务？</li>
+<li>客户集中度、核心技术来源、专利稳定性；专精特新／单项冠军资质对应的是国家级还是省级？（<strong>务必看证书原件</strong>）</li>
+<li>若 24 个月内无法退出，回购义务人是谁、履约能力如何（需穿透到实控人个人资产）？</li>
+</ol>
+<p><strong>对交易结构</strong></p>
+<ol>
+<li>交易对手方是基金（LP 份额）还是标的公司股东（股权）？两种路径的税费、审批、锁定期差异？</li>
+<li>"上市公司老板担保兜底"具体如何落地：差额补足协议？股权质押？实控人个人连带？可执行性如何验证？</li>
+<li>固定收益 5%/年由谁支付、从什么现金流支付、担保物是什么？</li>
+</ol>
+<span class="anchor" id="sec-8"></span><h2 class="sec" id="s9"><span class="no">8</span>8. 来源</h2>
+<ul>
+<li>九鼎投资官网：已上市案例（https://www.jdcapital.com/cases ）、公司概况（https://www.jdcapital.com/about/ ）——<strong>一手</strong></li>
+<li>巨潮资讯网：九鼎投资公告 2026-017（退市风险警示）、2026-044（立案告知书）、2026-036（2026 半年度经营情况简报）——<strong>一手</strong></li>
+<li>全国中小企业股份转让系统、腾讯行情／东方财富行情接口——<strong>一手</strong>（交易状态核验）</li>
+<li>投资界机构档案（昆吾九鼎）：https://m.pedaily.cn/vc/vc/2945.html ——二手</li>
+<li>爱企查（aiqicha.baidu.com）：企业资质标签、工商信息——二手（第三方数据库）</li>
+<li>工信部及各省工信厅：制造业单项冠军名单、专精特新"小巨人"名单、重点"小巨人"支持名单——<strong>一手</strong></li>
+<li>江门日报（汉宇集团第九批国家级单项冠军）、福建省工信厅（广生堂省级第八批）、河北省工信厅（惠达卫浴省级）、山东工信厅（海泰新光省级第八批）——二手／官方媒体</li>
+<li>华日通讯 A 股辅导进展报告（第二十一期，2026-07-10）——<strong>一手</strong></li>
+</ul>
+<hr>
+<blockquote><p>免责声明：本报告全部基于公开信息整理，不构成任何投资建议、要约或承诺。标的企业与九鼎系当前的持股关系需以工商档案、股东名册与基金合同为准。</p></blockquote>
+<div class="foot">九鼎投资系被投企业全清单 · 金字塔分层与优先级排序<br>编制日期 2026-09-29 ｜ 单文件移动版 ｜ 不构成投资建议</div>
+</div>
+<button class="btn-top" id="topBtn" aria-label="回到顶部">↑</button>
+<script>
+(function(){var b=document.getElementById('topBtn');
+window.addEventListener('scroll',function(){b.classList.toggle('show',window.scrollY>500)},{passive:true});
+b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+document.querySelectorAll('.tw').forEach(function(w){
+  if(w.scrollWidth>w.clientWidth+4){
+    w.style.boxShadow='inset -10px 0 10px -10px rgba(16,42,58,.22), inset 10px 0 10px -10px rgba(16,42,58,.10)';
+    var h=document.createElement('div');h.className='tw-hint';
+    h.textContent='↔ 表格较宽，左右滑动查看完整';
+    w.parentNode.insertBefore(h,w.nextSibling);
+  }
+});})();
+</script>
+</body>
+</html>
